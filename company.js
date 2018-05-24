@@ -1,15 +1,60 @@
 // Modal Image Gallery
-window.onload = main();
-const divSize = document.getElementById("home").offsetHeight;
-function main(){
-  window.onscroll = function() {scrollCheck();};
-  adjustNavbar();
-}
+// TODO: add slide in bar
 
+var divSize = document.getElementById("home").offsetHeight;
+window.onload = main();
+
+function main(){
+  adjustNavbar();
+  adjustInfoDivs();
+  disableScroll();
+  window.onscroll = function() {scrollCheck();};
+}
+function adjustInfoDivs(){
+  var sections= [".what_we_do",".contactus",".footage"];
+  var navSize = document.querySelector("#myNavbar").offsetHeight + "px";
+  sections.forEach(function(divName){
+    document.querySelector(divName).style.paddingTop=navSize;
+  });
+}
+function preventDefaultForScrollKeys(e) {
+    if (e.key == "ArrowDown" || e.key == "ArrowUp")
+      e.preventDefault();
+}
+function preventDefault(e){
+  e = e || window.event;
+  if (e.preventDefault)
+    e.preventDefault();
+  e.preventDefault();
+  e.returnValue = false;
+}
+function disableScroll(){
+  if(window.addEventListener){
+    window.addEventListener('DOMMouseScroll',preventDefault,false);
+    window.onwheel = preventDefault; // modern standard
+  }
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+function showOrDont(elementId){
+  var e = document.querySelector(elementId);
+  console.log(e);
+  if( e.className.indexOf(" w3-show") != -1)
+    e.className = e.className.replace(" w3-show", " w3-hide");
+}
+function fixHomeClickDefault(){
+  var homeButton= document.querySelector('a[href="#home"]');
+
+  homeButton.addEventListener("click",function(){
+    showOrDont("#navDemo");
+  });
+
+}
 function adjustNavbar(){
+    fixHomeClickDefault();
     var divs = getDivs();
     var navbarSize = document.querySelector("#myNavbar").offsetHeight.toString() + "px";
-    
+
     for(i=2;i<divs.length;i++){
       divs[i].style.position = "relative";
       divs[i].style.top = navbarSize;
@@ -17,10 +62,10 @@ function adjustNavbar(){
     }
 }
 function getDivs(){
-  let sections = document.body.childNodes;
-  let mainDivs = [];
+  var sections = document.body.childNodes;
+  var mainDivs = [];
   for(i=0;i<sections.length;i++){
-    let tempDiv = sections[i];
+    var tempDiv = sections[i];
     if(tempDiv.tagName == 'DIV')
       mainDivs.push(tempDiv);
   }
@@ -145,8 +190,16 @@ function scrollIt(destination, duration = 200, easing = 'easeOutQuad', callback)
   scroll();
 }
 function slideTo(sect){
+  var element    = document.querySelector(sect);
+  var navbarSize = document.querySelector("#myNavbar").offsetHeight.toString() + "px";
   if(sect == ".what_we_do" || sect == ".footage" || sect == ".contactus")
     scrollIt(document.querySelector(sect),500,'easeOutQuad');
+
+  element.style.position="relative";
+  element.style.top = navbarSize;
+// TODO: adjust navbar and content plane
+
+
 }
 // Used to toggle the menu on small screens when clicking on the menu button
 function toggleFunction(ev) {
@@ -156,17 +209,20 @@ function toggleFunction(ev) {
         x.className += " w3-show";
     }else{
         x.className = x.className.replace(" w3-show", "");
+
         slideTo(choosenSection);
     }
 }
-
-
 // CAPABILITIES Section JS
-
+var focusedCapability = null;
 function show(section){
-  let e = document.querySelector( '.' + section );
+  var e = document.querySelector( '.' + section );
   if(e.className.indexOf(" w3-show") == -1){
+    if( focusedCapability !== null )
+      focusedCapability.className = focusedCapability.className.replace(" w3-show", " w3-hide");
     e.className = e.className.replace(" w3-hide", " w3-show");
+    focusedCapability = e;
+
   }else{
     e.className = e.className.replace(" w3-show", " w3-hide");
   }
