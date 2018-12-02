@@ -29,14 +29,18 @@
 #home a{
   transition: all 5s ease;
 }
-
+.what_we_do{
+  z-index: -1;
+}
 .contactus{
+  z-index: -1;
   min-height: 100%;
   width: 100%;
   height: 100%;
 
 }
 .footage{
+  z-index: -1;
   min-height: 100%;
   width: 100%;
   height: 100%;
@@ -118,4 +122,51 @@ body, html {
 form p{
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+
+
+/* side bar navigation menu */
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    text-overflow: hidden;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align:center;
+
+}
+
+.sidenav a {
+    white-space: nowrap;
+    color:white;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    transition: 0.3s;
+
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

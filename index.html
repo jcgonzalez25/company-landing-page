@@ -10,36 +10,22 @@
 
 
 
-<script>
-  document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
-  ':35729/livereload.js?snipver=1"></' + 'script>')
-</script>
 
 
 <body>
-
 <!-- Navbar (sit on top) -->
-<div class="w3-top">
-  <div class="w3-bar" id="myNavbar" style="background-color:lightgray;">
-    <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction(event)" title="Toggle Navigation Menu">
-      <i class="fa fa-bars"></i>
+
+<div class="w3-top" id="myNavbar">
+  <div class="w3-bar w3-hide-large" style="background-color:lightgray;">
+    <a href="tel:8156416168" class="w3-button">
+      <i class="fa fa-phone"></i>
     </a>
-    <a href="#home" class="w3-bar-item w3-button">Home</a>
-    <a href="#about" class="w3-bar-item w3-button w3-hide-small" onclick="s()"><i class="fa fa-user"></i> ABOUT</a>
-    <a href="#portfolio" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-th"></i> PORTFOLIO</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-envelope"></i> CONTACT</a>
-    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
-      <i class="fa fa-search"></i>
+    <a class="w3-bar-item w3-button w3-hide-medium w3-right" href="javascript:void(0);" onclick="openNav()" title="Toggle Navigation Menu" id="whopper_button">
+      <i class="fa fa-bars"></i>
     </a>
   </div>
 
   <!-- Navbar on small screens -->
-  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-    <a id=".what_we_do" href="#what_we_do" class="w3-bar-item w3-button" onclick="toggleFunction(event)">CAPABILITIES</a>
-    <a id=".footage" href="#footage" class="w3-bar-item w3-button" onclick="toggleFunction(event)">COMPANY FOOTAGE</a>
-    <a id=".contactus" href="#contactus" class="w3-bar-item w3-button" onclick="toggleFunction(event)">CONTACT</a>
-
-  </div>
 </div>
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
@@ -49,13 +35,13 @@
   <div class="bottom-arrow w3-hide-large w3-hide-medium">
     <span>What We Do</span>
     <a>
-      <div class="arrow" onclick="slideTo('.what_we_do')"></div>
+      <div class="arrow" onclick="Utilities.slideTo('.what_we_do')"></div>
     </a>
   </div>
 </div>
 
 <!-- Second Section -->
-<div class="what_we_do w3-display-container w3-opacity-min w3-hide-large w3-hide-medium">
+<div class="what_we_do w3-display-container w3-opacity-min w3-hide-large w3-hide-medium" id="what_we_do">
   <div class="wrapper_what_we_do">
     <div class="w3-btn w3-block w3-middle-align w3-light-gray" onclick="show('experienceWith')">Items We Have Experience With</div>
     <div class="experienceWith w3-hide">
@@ -101,15 +87,15 @@
     </div>
   </div>
 </div>
-<div class="footage w3-display-container w3-hide-large w3-hide-medium">
-<iframe width="100%" height="40%" src="https://www.youtube.com/embed/X_VpHI2vdfY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<div class="footage w3-display-container w3-hide-large w3-hide-medium" id="footage">
+  <iframe width="100%" height="40%" src="https://www.youtube.com/embed/X_VpHI2vdfY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
-<div class="contactus w3-hide-large w3-hide-medium" style="color:black;">
+<div class="contactus w3-hide-large w3-hide-medium" style="color:black;" id="contact_us">
 
      <form action="/action_page.php" target="_blank">
        <p><input class="w3-input w3-padding-16" type="text" placeholder="First And Last Name" required name="Name"></p>
        <p><input class="w3-input w3-padding-16" type="text" placeholder="Company" required name="company_name"></p>
-       <p><input class="w3-input w3-padding-16" type="text" placeholder="Adress" required name="address"></p>
+       <p><input class="w3-input w3-padding-16" type="text" placeholder="Adress" required name="address" onchange="search.begin(event)"></p>
        <p><input class="w3-input w3-padding-16" type="text" placeholder="City" required name="Message"></p>
        <p><input class="w3-input w3-padding-16" type="text" placeholder="State" required name="Message"></p>
        <p><input class="w3-input w3-padding-16" type="text" placeholder="Zip Code" required name="Message"></p>
@@ -122,12 +108,11 @@
 
  <!-- End page content -->
  </div>
-
-
-
 </div>
-<script type="text/javascript" src="locations.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNnwnNt6Zr3YE5QWyggn26LLUBs6s3ffI&libraries=places"></script>
+<script src="capabilities.js"></script>
+<script src="utilities.js"></script>
+<script src="TopNavBar.js"></script>
+<script src="locations.js"></script>
 <script src="company.js"></script>
 </body>
 </html>
